@@ -1,0 +1,14 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserSchema {
+  id: String!
+  name: String!
+  address: String!
+  age: Int!
+}
+
+type Query {
+  getUser: UserSchema!
+}
