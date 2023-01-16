@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { IUserService } from 'src/domains/interfaces';
+import { InfraModule } from 'src/infra/infra.module';
 import { ServiceModule } from 'src/services/service.module';
 import { UserService } from 'src/services/user.service';
 import { UserResolver } from './resolvers/user.resolver';
@@ -19,6 +20,7 @@ import { UserResolver } from './resolvers/user.resolver';
       playground: true,
     }),
     ServiceModule,
+    InfraModule,
   ],
   providers: [
     UserResolver,

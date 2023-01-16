@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
+import { InfraModule } from 'src/infra/infra.module';
 import { IUserService } from '../../domains/interfaces';
 import { ServiceModule } from '../../services/service.module';
 import { UserService } from '../../services/user.service';
 import { UserController } from './user.controller';
 
 @Module({
-  imports: [ServiceModule],
+  imports: [ServiceModule, InfraModule],
   providers: [
     {
       provide: IUserService,
