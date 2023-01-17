@@ -10,5 +10,5 @@ type UserSchema {
 }
 
 type Query {
-  getUser: UserSchema!
+  getUsers: [UserSchema!]!
 }

@@ -6,8 +6,8 @@ import { UserSchema } from '../schemas/user.schema';
 export class UserResolver implements IUserResolver {
   constructor(private readonly userService: IUserService) {}
 
-  @Query(() => UserSchema)
-  async getUser(): Promise<IUser> {
-    return this.userService.getOne();
+  @Query(() => [UserSchema])
+  async getUsers(): Promise<IUser[]> {
+    return this.userService.getAll();
   }
 }
