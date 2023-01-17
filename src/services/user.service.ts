@@ -7,11 +7,10 @@ export class UserService implements IUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async getOne(): Promise<IUser> {
-    return this.userRepository.create({
-      id: '131211',
-      name: 'mateus',
-      address: 'Arraial do cabo',
-      age: 18,
-    });
+    return this.userRepository.findOne({ where: { name: 'mateus' } });
+  }
+
+  async getAll(): Promise<IUser[]> {
+    return this.userRepository.findAll();
   }
 }

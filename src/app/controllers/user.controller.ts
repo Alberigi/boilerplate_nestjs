@@ -9,4 +9,9 @@ export class UserController {
   getOne(): Promise<IUser> {
     return this.userService.getOne();
   }
+
+  @Get('getAll')
+  getAll(): Promise<IUser[]> {
+    return this.userService.getAll();
+  }
 }
