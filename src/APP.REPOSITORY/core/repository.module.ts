@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { IUserRepository } from 'src/domains/interfaces/user-repository.interface';
-import { PrismaService } from './config/prisma.service';
-import { UserRepository } from './repositorys/user.repository';
+import { DataBaseModule } from 'src/APP.DATABASE/core/database.module';
+import { IUserRepository } from 'src/DOMAIN/interfaces/repository/user-repository.interface';
+import { UserRepository } from '../user.repository';
 
 @Module({
-  imports: [],
+  imports: [DataBaseModule],
   providers: [
-    PrismaService,
     UserRepository,
     {
       provide: IUserRepository,
@@ -14,7 +13,6 @@ import { UserRepository } from './repositorys/user.repository';
     },
   ],
   exports: [
-    PrismaService,
     UserRepository,
     {
       provide: IUserRepository,
@@ -22,4 +20,4 @@ import { UserRepository } from './repositorys/user.repository';
     },
   ],
 })
-export class InfraModule {}
+export class RepositoryModule {}

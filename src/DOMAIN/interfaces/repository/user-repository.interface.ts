@@ -1,5 +1,5 @@
-import { FindOptionsDTO } from '../dtos';
-import { IUser } from './user.interface';
+import { FindOptionsDTO } from 'src/DOMAIN/dtos';
+import { IUser } from '../user.interface';
 
 export abstract class IUserRepository {
   abstract findOne(options: FindOptionsDTO): Promise<IUser>;

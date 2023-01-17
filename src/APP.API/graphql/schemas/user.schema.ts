@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { IUser } from 'src/domains/interfaces';
+import { IUser } from 'src/DOMAIN/interfaces';
 
 @ObjectType()
 export class UserSchema implements IUser {

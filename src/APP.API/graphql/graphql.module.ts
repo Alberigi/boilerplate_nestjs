@@ -2,11 +2,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { IUserService } from 'src/domains/interfaces';
-import { InfraModule } from 'src/infra/infra.module';
-import { ServiceModule } from 'src/services/service.module';
-import { UserService } from 'src/services/user.service';
+import { IUserService } from 'src/DOMAIN/interfaces';
+import { UserService } from 'src/APP.SERVICE/user.service';
 import { UserResolver } from './resolvers/user.resolver';
+import { ServiceModule } from 'src/APP.SERVICE/core/service.module';
+import { RepositoryModule } from 'src/APP.REPOSITORY/core/repository.module';
 
 @Module({
   imports: [
@@ -14,13 +14,13 @@ import { UserResolver } from './resolvers/user.resolver';
       driver: ApolloDriver,
       autoSchemaFile: join(
         process.cwd(),
-        'src/app/graphql/schemas/main.graphql',
+        'src/APP.API/graphql/schemas/main.graphql',
       ),
       debug: true,
       playground: true,
     }),
     ServiceModule,
-    InfraModule,
+    RepositoryModule,
   ],
   providers: [
     UserResolver,
