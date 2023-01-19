@@ -6,11 +6,26 @@ import { IUser, IUserService } from '../DOMAIN/interfaces';
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async getOne(): Promise<IUser> {
-    return this.userRepository.findOne({ where: { name: 'mateus' } });
+  async getOne(indentificator: string | number): Promise<IUser> {
+    return this.userRepository.findOne({ where: { id: indentificator } });
   }
 
   async getAll(): Promise<IUser[]> {
     return this.userRepository.findAll();
+  }
+
+  async save(data: Partial<IUser>): Promise<IUser> {
+    return this.userRepository.save(data);
+  }
+
+  async update(
+    indentificator: string | number,
+    data: Partial<IUser>,
+  ): Promise<IUser> {
+    return this.userRepository.update({ where: indentificator, data });
+  }
+
+  async delete(indentificator: string | number): Promise<IUser> {
+    return this.userRepository.delete({ where: { id: indentificator } });
   }
 }

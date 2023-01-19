@@ -1,17 +1,44 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { IUserController } from 'src/DOMAIN/interfaces/controller/user-controller.interface';
 import { IUserService, IUser } from '../../DOMAIN/interfaces';
 
 @Controller('user')
-export class UserController {
+export class UserController implements IUserController {
   constructor(private readonly userService: IUserService) {}
-
-  @Get('getOne')
-  getOne(): Promise<IUser> {
-    return this.userService.getOne();
-  }
 
   @Get('getAll')
   getAll(): Promise<IUser[]> {
     return this.userService.getAll();
+  }
+
+  @Get(':id')
+  getOne(@Param() indentificator: string): Promise<IUser> {
+    return this.userService.getOne(indentificator);
+  }
+
+  @Post('save')
+  async save(@Body() data: Partial<IUser>): Promise<IUser> {
+    return this.userService.save(data);
+  }
+
+  @Put(':id')
+  async update(
+    @Param() indentificator: string,
+    @Body() data: Partial<IUser>,
+  ): Promise<IUser> {
+    return this.userService.update(indentificator, data);
+  }
+
+  @Delete(':id')
+  async delete(@Param() indentificator: string): Promise<IUser> {
+    return this.userService.delete(indentificator);
   }
 }

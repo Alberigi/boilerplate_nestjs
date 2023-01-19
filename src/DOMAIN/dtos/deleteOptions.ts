@@ -1,6 +1,6 @@
 import { BaseOptionsDTO } from './baseOptions';
 
-export interface FindOptionsDTO extends BaseOptionsDTO {
+export interface DeleteOptionsDTO extends BaseOptionsDTO {
   select?: any;
   where: any;
 }
