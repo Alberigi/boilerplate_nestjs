@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserSchema {
+type User {
   id: String!
   name: String!
   address: String!
@@ -10,5 +10,23 @@ type UserSchema {
 }
 
 type Query {
-  getUsers: [UserSchema!]!
+  getUsers: [User!]!
+  getUser(indentificator: String!): User!
+}
+
+type Mutation {
+  createUser(user: UserInput!): User!
+  updateUser(args: ArgsUpdateUser!): User!
+  deleteUser(indentificator: String!): User!
+}
+
+input UserInput {
+  name: String
+  address: String
+  age: Int
+}
+
+input ArgsUpdateUser {
+  indentificator: String!
+  data: UserInput!
 }

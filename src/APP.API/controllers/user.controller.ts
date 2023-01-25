@@ -7,6 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ArgsUpdateDTO } from 'src/DOMAIN/dtos';
 import { IUserController } from 'src/DOMAIN/interfaces/controller/user-controller.interface';
 import { IUserService, IUser } from '../../DOMAIN/interfaces';
 
@@ -31,8 +32,7 @@ export class UserController implements IUserController {
 
   @Put(':id')
   async update(
-    @Param() indentificator: string,
-    @Body() data: Partial<IUser>,
+    @Body() { indentificator, data }: ArgsUpdateDTO<IUser>,
   ): Promise<IUser> {
     return this.userService.update(indentificator, data);
   }

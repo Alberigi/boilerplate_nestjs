@@ -22,7 +22,7 @@ export class UserService implements IUserService {
     indentificator: string | number,
     data: Partial<IUser>,
   ): Promise<IUser> {
-    return this.userRepository.update({ where: indentificator, data });
+    return this.userRepository.update({ where: { id: indentificator }, data });
   }
 
   async delete(indentificator: string | number): Promise<IUser> {

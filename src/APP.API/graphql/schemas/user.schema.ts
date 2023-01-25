@@ -1,10 +1,11 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { ArgsUpdateDTO } from 'src/DOMAIN/dtos';
 import { IUser } from 'src/DOMAIN/interfaces';
 
 @ObjectType()
-export class UserSchema implements IUser {
+export class User implements IUser {
   @Field()
-  id: string;
+  id?: string;
 
   @Field()
   name: string;
@@ -14,4 +15,25 @@ export class UserSchema implements IUser {
 
   @Field(() => Int)
   age: number;
+}
+
+@InputType()
+export class UserInput {
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  address?: string;
+
+  @Field(() => Int, { nullable: true })
+  age?: number;
+}
+
+@InputType()
+export class ArgsUpdateUser implements ArgsUpdateDTO<UserInput> {
+  @Field()
+  indentificator: string;
+
+  @Field()
+  data: UserInput;
 }
