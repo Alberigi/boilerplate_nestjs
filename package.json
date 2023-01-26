@@ -18,7 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "gen:schema": "awk 1 src/APP.DATABASE/models/*.prisma > src/APP.DATABASE/prisma/schema.prisma && npx prisma format"
+    "migrate": "npx prisma migrate dev",
+    "db:show": "npx prisma studio",
+    "db:schema": "awk 1 src/APP.DATABASE/models/*.prisma > src/APP.DATABASE/prisma/schema.prisma && npx prisma format"
   },
   "prisma": {
     "schema": "src/APP.DATABASE/prisma/schema.prisma"
