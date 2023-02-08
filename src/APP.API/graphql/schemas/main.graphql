@@ -30,3 +30,7 @@ input ArgsUpdateUser {
   indentificator: String!
   data: UserInput!
 }
+
+type Subscription {
+  newUser: User!
+}

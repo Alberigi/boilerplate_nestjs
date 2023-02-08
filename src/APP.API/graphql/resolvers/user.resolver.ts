@@ -1,10 +1,15 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { IUser, IUserResolver, IUserService } from 'src/DOMAIN/interfaces';
 import { ArgsUpdateUser, User, UserInput } from '../schemas/user.schema';
+import { NEW_USER } from '../utils/subscriptions-event';
 
 @Resolver()
 export class UserResolver implements IUserResolver {
-  constructor(private readonly userService: IUserService) {}
+  constructor(
+    private readonly userService: IUserService,
+    private readonly pubSub: PubSub,
+  ) {}
 
   @Query(() => [User])
   async getUsers(): Promise<IUser[]> {
@@ -20,7 +25,9 @@ export class UserResolver implements IUserResolver {
 
   @Mutation(() => User)
   async createUser(@Args('user') user: UserInput): Promise<IUser> {
-    return this.userService.save(user);
+    const userCreated = await this.userService.save(user);
+    this.pubSub.publish(NEW_USER, userCreated);
+    return userCreated;
   }
 
   @Mutation(() => User)

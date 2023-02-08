@@ -16,10 +16,14 @@ import { GaphQlProviders } from './graphql.providers';
       ),
       debug: true,
       playground: true,
+      subscriptions: {
+        'graphql-ws': true,
+        'subscriptions-transport-ws': true,
+      },
     }),
     ServiceModule,
   ],
-  providers: [UserResolver, ...GaphQlProviders],
-  exports: [UserResolver, ...GaphQlProviders],
+  providers: [...GaphQlProviders],
+  exports: [...GaphQlProviders],
 })
 export class GraphQlModule {}
